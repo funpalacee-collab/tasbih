@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ur">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasbeeh Counter</title>
+    <link rel="shortcut icon" href="./assets/image.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Noor Particles -->
+    <div id="noor-particles"></div>
+
+    <!-- About Button -->
+    <button id="openAbout" class="about-btn">About App</button>
+
+    <!-- Settings Button -->
+    <button id="openSettings" class="settings-btn">
+        <i data-lucide="settings"></i>
+    </button>
+
+    <!-- Zikr Selector -->
+    <div class="zikr-selector">
+        <div id="selectedZikr">
+            <span id="zikrText">سبحان الله</span>
+            <i data-lucide="chevron-down" class="dropdown-icon"></i>
+        </div>
+        <div class="zikr-options hidden">
+            <div data-value="subhanallah">سبحان الله</div>
+            <div data-value="alhamdulillah">الحمد لله</div>
+            <div data-value="allahuakbar">الله أكبر</div>
+            <div data-value="astaghfirullah">أستغفر الله</div>
+            <div data-value="lailaha">لا إله إلا الله</div>
+             <div data-value="darood">درود شریف</div>
+            <div data-value="custom">➕ Custom Zikr</div>
+        </div>
+    </div>
+
+    <!-- Progress Ring -->
+    <div class="ring-wrapper">
+        <svg class="progress-ring" width="260" height="260">
+            <circle class="ring-bg" cx="130" cy="130" r="110" />
+            <circle class="ring-progress" cx="130" cy="130" r="110" />
+        </svg>
+        <div id="display" class="zero">0</div>
+    </div>
+
+    <div class="ring-buttons">
+        <button id="decrement"><i data-lucide="minus"></i></button>
+        <button id="increment"><i data-lucide="plus"></i></button>
+    </div>
+
+    <button id="reset" class="reset-btn">Reset</button>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Settings</h3>
+
+            <div class="theme-options">
+                <button data-theme="dark">🌙 Dark</button>
+                <button data-theme="green">🕌 Green</button>
+                <button data-theme="blue">💠 Blue</button>
+                <button data-theme="gold">✨ Gold</button>
+            </div>
+
+            <label>Custom Background</label>
+            <input type="color" id="customColor">
+
+            <label class="sound-toggle">
+                <input type="checkbox" id="soundToggle" checked>
+                Tasbeeh Sound
+            </label>
+
+            <button id="closeSettings">Close</button>
+        </div>
+    </div>
+
+    <!-- Tasbeeh Sound -->
+    <audio id="tasbeehSound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3">
+    </audio>
+
+    <!-- About App Modal -->
+    <div id="aboutModal" class="modal hidden">
+        <div class="modal-content about-content">
+            <h3>About This App</h3>
+
+            <p class="about-text">
+                This <strong>Digital Tasbeeh</strong> is designed to help Muslims
+                remember Allah easily and peacefully.
+            </p>
+
+            <p class="about-text arabic">
+                ﴿ أَلَا بِذِكْرِ ٱللَّٰهِ تَطْمَئِنُّ ٱلْقُلُوبُ ﴾
+            </p>
+
+            <p class="about-text">
+                Features include Arabic zikr, custom tasbeeh counts,
+                Noor animations, sound feedback, and beautiful themes.
+            </p>
+
+            <p class="about-dev">
+                Developed by <span>HUZAIFA</span><br>
+                <p>DESIGNER 🤍</p>
+            </p>
+
+            <button id="closeAbout">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

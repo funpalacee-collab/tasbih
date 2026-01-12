@@ -1,0 +1,364 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Amiri", serif;
+}
+
+:root {
+    --bg: radial-gradient(circle at top, #1b5e50, #061a15);
+    --btn: #1fa67a;
+    --text: #fff;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* Animations */
+@keyframes noorPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(3);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+}
+
+/* Noor Particles */
+#noor-particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.noor {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(180, 255, 220, 0.8);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: floatUp linear infinite;
+    box-shadow: 0 0 12px rgba(0, 255, 180, 0.8);
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.6);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(135deg, var(--btn), #0b3d2e);
+    color: var(--text);
+    border: none;
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 255, 180, 0.4);
+    font-size: 1.2rem;
+    transition: transform 0.15s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(0, 255, 180, 0.6);
+}
+
+button:active {
+    transform: scale(0.95) rotate(-5deg);
+}
+
+.reset-btn {
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+/* Settings Button */
+.settings-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border-radius: 50%;
+    padding: 0.6rem;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    padding: 1.5rem;
+    border-radius: 18px;
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0, 255, 180, 0.35);
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: all 0.3s ease;
+}
+
+.modal:not(.hidden) .modal-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.theme-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 1rem 0;
+}
+
+.theme-options button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-options button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 255, 180, 0.5);
+}
+
+.sound-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 1rem 0;
+}
+
+/* Zikr Selector */
+.zikr-selector {
+    width: 80%;
+    max-width: 260px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+#selectedZikr {
+    padding: 0.7rem 1rem;
+    font-size: 1.4rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 255, 180, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.dropdown-icon {
+    width: 20px;
+    height: 20px;
+    stroke: rgba(0, 255, 180, 0.8);
+    transition: transform 0.3s ease;
+}
+
+.zikr-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 14px;
+    overflow: hidden;
+    z-index: 5;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.zikr-options:not(.hidden) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.zikr-options div {
+    padding: 0.6rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.zikr-options div:hover {
+    background: rgba(0, 255, 180, 0.25);
+    transform: scale(1.05);
+}
+
+/* Progress Ring */
+.ring-wrapper {
+    position: relative;
+    width: 70vw;
+    max-width: 260px;
+    height: 70vw;
+    max-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring {
+    position: absolute;
+    transform: rotate(-90deg);
+}
+
+.ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 10;
+}
+
+.ring-progress {
+    fill: none;
+    stroke: rgba(0, 255, 180, 0.9);
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 691;
+    stroke-dashoffset: 691;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 180, 0.8));
+    transition: stroke-dashoffset 0.3s ease;
+    animation: ringGlow 2s infinite;
+}
+
+@keyframes ringGlow {
+    0% {
+        filter: drop-shadow(0 0 8px rgba(0, 255, 180, 0.6));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 20px rgba(0, 255, 180, 0.9));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 8px rgba(0, 255, 180, 0.6));
+    }
+}
+
+#display {
+    font-size: 10vw;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+
+#display.zero {
+    opacity: 0.3;
+}
+
+/* Ring Buttons */
+.ring-buttons {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width:600px) {
+    #display {
+        font-size: 35vw;
+    }
+
+    button {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .settings-btn {
+        padding: 0.5rem;
+    }
+
+    .zikr-selector {
+        width: 90%;
+    }
+}
+
+@media (min-width:601px) and (max-width:900px) {
+    button {
+        padding: 0.9rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* About App */
+.about-btn {
+    border-radius: 12px;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.about-content {
+    max-width: 320px;
+}
+
+.about-text {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin: 0.6rem 0;
+    line-height: 1.6;
+}
+
+.about-text.arabic {
+    font-size: 1.1rem;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.about-dev {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.about-dev span {
+    color: #00ffcc;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+}
